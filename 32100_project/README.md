@@ -28,7 +28,7 @@ The results of our statistical tests using a logistic regression model are provi
 
 Contrary to our hypotheses, the relationship between nWBV% and dementia likelihood was positive, meaning that higher brain volumes were associated with an increased likelihood of dementia diagnoses. Preliminary exploration into related literature suggests that the presence of Lewy bodies could be a factor, whereby the typical hippocampal shrinkage characterizing dementia may be counteracted by the presence of Lewy body masses in the brain (Kantarci et al., 2016). However, we are uncertain whether this relationship is due to Lewy bodies or may simply be an artifact of potential multicollinearity among our predictors, primarily MMSE and nWBV%. However, we ran an exploratory correlation analysis (see Appendix 2), and though the two were significantly correlated, the strength of the relationship was moderate (r = 0.48, p <0.001). Additionally, we ran an exploratory logistic regression removing MMSE, and the effect of nWBV% was still positive, suggesting it might not be a multicollinearity issue. 
 
-Optimization terminated successfully.
+**Optimization terminated successfully.
          Current function value: 0.371265
          Iterations 7
                            Logit Regression Results                           
@@ -49,7 +49,7 @@ education_level                           0.2754      0.254      1.084      0.27
 socioeconomic_status_(SES)                0.3753      0.299      1.256      0.209      -0.211       0.961
 mini_mental_state_examination_(MMSE)     -0.6936      0.139     -4.976      0.000      -0.967      -0.420
 normalize_whole_brain_volume%_(nWBV%)     0.1188      0.045      2.642      0.008       0.031       0.207
-=========================================================================================================
+=========================================================================================================**
 
 ## Machine Learning
 
