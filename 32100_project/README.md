@@ -33,5 +33,7 @@ Using our test set and a cutoff threshold of 0.5, our logistic regression model 
 Our model was not able to reliably predict whether someone with dementia has dementia (of the 30 individuals who truly have dementia, our model only predicted a dementia diagnosis in 19). However, it was able to accurately predict a “no dementia” diagnosis in 31 out of 35 nondemented individuals. Moreover, lowering the cutoff threshold yielded better accuracy in certain instances and reduced the number of false negatives. However, we chose to keep the model’s default cutoff threshold of 0.5 as we are not aware of any industry precedent that suggests changing this level, and the relatively high percentage of false negatives may be due to our predictors or random noise within our test set.
 
 1 Alzheimer’s Association: Alzheimer’s Disease and Dementia. “Alzheimer’s and Dementia.” Accessed May 10, 2022. https://alz.org/alzheimer_s_dementia
+
 2 OASIS Brains Project. “About.” Accessed May 10, 2022. https://www.oasis-brains.org/#about
+
 3 Neurology. “Hippocampal volumes predict risk of dementia with Lewy bodies in mild cognitive impairment” Accessed June 1, 2022. https://www.aan.com/PressRoom/home/PressRelease/1500
