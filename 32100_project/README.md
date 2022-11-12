@@ -1,16 +1,18 @@
 # Alzheimer’s disease brain imaging analysis
 ## Introduction
 Today, there are over 6.5 million people living with Alzheimer’s disease (AD) in America. According to the Alzheimer’s Association, this number is expected to climb to over 13 million by 2050. Alzheimer’s is the leading cause of dementia, which is a general term for symptoms related to mental decline (i.e., memory loss, reasoning impairment, or decline in other cognitive abilities). This progressive disease often starts with mild memory loss, but frequently progresses to a severe level in which an individual loses the ability to carry on a conversation, respond to their environment, or attend to their daily needs. With no cure at this point, there is a race to better understand this disease and to identify  treatments  for  patients  suffering with  Alzheimer’s.  
+
 The Open Access Series of Imaging Studies (OASIS) is an important initiative with the express goal of “[making] neuroimaging data sets of the brain freely available to the scientific community.” Their hope is that important future discoveries in neuroscience can be stimulated by leveraging the collective insights of the scientific community at large. Our data set is specifically from a 2007 study titled Open Access Series of Imaging Studies (OASIS): Cross-sectional MRI Data in Young, Middle Aged, Nondemented, and Demented Older Adults that was published in the Journal of Cognitive Neuroscience. The original study evaluates influential factors that may be predictive of receiving an AD diagnosis. 
 Our team would like to take part in using this data to investigate the predictive factors of dementia, though an imperfect measure, a useful proxy for AD. Our specific research question is: Can you use a person’s demographic data, industry anatomic measures of brain health, clinical data, and/or MRI scans to predict clinical dementia, thereby illuminating those who may be at risk of AD? 
 
 Our data is a cross-sectional dataset of 416 men and women between the ages of 18 to 96 with varied neurological health backgrounds. The dataset also includes a second MRI scan on a subsequent visit for 20 nondemented participants, administered within 90 days of their initial scan, to serve as a measure of reliability. This makes for a total of 436 observations in the data set (416 unique individuals; 20 follow up observations from nondemented participants). Among the study participants, 100 have been diagnosed with a mild to moderate form of dementia and the remaining participants have no known clinical indications of dementia (CDR > 0) or AD diagnoses.
 An Alzheimer’s diagnosis is a binary outcome. However, the progression of dementia-related cognitive and behavioral aspects of Alzheimer disease is indicated by a Clinical Dementia Rating (CDR) score. The CDR ratings include: 0 = nondemented; 0.5 = very mild dementia; 1 = mild dementia; 2 = moderate dementia; 3 = severe. All participants in our dataset had CDR scores ranging from 0 - 2 or a CDR score was unavailable. Additionally, all participants with dementia (CDR >0) were diagnosed with probable AD. The CDR score is the dependent variable in this analysis. 
+
 We will explore the viability of the below independent variables, collected for each participant, as a means of predicting CDR score:
 The variables include the following:
 gender                                 	
 dominant hand                           	
- age_in_years                          	
+age_in_years                          	
 education_level                         	
 socioeconomic_status_(SES)              	
 mini_mental_state_examination_(MMSE) - a clinical assessment of cognitive function    	
@@ -26,11 +28,36 @@ The results of our statistical tests using a logistic regression model are provi
 
 Contrary to our hypotheses, the relationship between nWBV% and dementia likelihood was positive, meaning that higher brain volumes were associated with an increased likelihood of dementia diagnoses. Preliminary exploration into related literature suggests that the presence of Lewy bodies could be a factor, whereby the typical hippocampal shrinkage characterizing dementia may be counteracted by the presence of Lewy body masses in the brain (Kantarci et al., 2016). However, we are uncertain whether this relationship is due to Lewy bodies or may simply be an artifact of potential multicollinearity among our predictors, primarily MMSE and nWBV%. However, we ran an exploratory correlation analysis (see Appendix 2), and though the two were significantly correlated, the strength of the relationship was moderate (r = 0.48, p <0.001). Additionally, we ran an exploratory logistic regression removing MMSE, and the effect of nWBV% was still positive, suggesting it might not be a multicollinearity issue. 
 
+Optimization terminated successfully.
+         Current function value: 0.371265
+         Iterations 7
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:        dementia_binary   No. Observations:                  151
+Model:                          Logit   Df Residuals:                      145
+Method:                           MLE   Df Model:                            5
+Date:                Sat, 12 Nov 2022   Pseudo R-squ.:                  0.4271
+Time:                        12:09:02   Log-Likelihood:                -56.061
+converged:                       True   LL-Null:                       -97.857
+Covariance Type:            nonrobust   LLR p-value:                 1.485e-16
+=========================================================================================================
+                                            coef    std err          z      P>|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------------------------
+age_in_years                              0.1002      0.021      4.662      0.000       0.058       0.142
+gender                                    0.7129      0.499      1.428      0.153      -0.266       1.692
+education_level                           0.2754      0.254      1.084      0.279      -0.223       0.774
+socioeconomic_status_(SES)                0.3753      0.299      1.256      0.209      -0.211       0.961
+mini_mental_state_examination_(MMSE)     -0.6936      0.139     -4.976      0.000      -0.967      -0.420
+normalize_whole_brain_volume%_(nWBV%)     0.1188      0.045      2.642      0.008       0.031       0.207
+=========================================================================================================
+
 ## Machine Learning
 
 Using our test set and a cutoff threshold of 0.5, our logistic regression model has an accuracy of 77%. The results of our model on predicting dementia are provided in Figure 1f. 
 
 Our model was not able to reliably predict whether someone with dementia has dementia (of the 30 individuals who truly have dementia, our model only predicted a dementia diagnosis in 19). However, it was able to accurately predict a “no dementia” diagnosis in 31 out of 35 nondemented individuals. Moreover, lowering the cutoff threshold yielded better accuracy in certain instances and reduced the number of false negatives. However, we chose to keep the model’s default cutoff threshold of 0.5 as we are not aware of any industry precedent that suggests changing this level, and the relatively high percentage of false negatives may be due to our predictors or random noise within our test set.
+
+================================================================================================================================================
 
 1 Alzheimer’s Association: Alzheimer’s Disease and Dementia. “Alzheimer’s and Dementia.” Accessed May 10, 2022. https://alz.org/alzheimer_s_dementia
 
